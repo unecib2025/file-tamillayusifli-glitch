@@ -1,0 +1,96 @@
+#1
+'''
+with open('users.txt', 'r', encoding='utf-8') as file:
+    for line in file:
+        print(line.strip())
+'''
+#2
+'''
+with open('passwords.txt', 'r', encoding='utf-8') as infile, \
+     open('weak.txt', 'w', encoding='utf-8') as outfile:
+    for line in infile:
+        password = line.strip()
+        if len(password) < 8:
+            outfile.write(password + '\n')
+'''
+#3
+'''
+with open('ips.txt', 'r', encoding='utf-8') as infile:
+    unique_ips = set(line.strip() for line in infile if line.strip())
+
+with open('unique_ips.txt', 'w', encoding='utf-8') as outfile:
+    for ip in unique_ips:
+        outfile.write(ip + '\n')
+'''
+#4
+'''
+
+with open('log.txt', 'r', encoding='utf-8') as file:
+    count = sum(1 for _ in file)
+
+print(count)
+'''
+#5
+'''
+with open('ports.txt', 'r', encoding='utf-8') as infile, \
+     open('blocked_ports.txt', 'w', encoding='utf-8') as outfile:
+    for line in infile:
+        line = line.strip()
+        if line.isdigit():
+            port = int(line)
+            if port < 1024:
+                outfile.write(f"{port}\n")
+'''
+#6
+'''
+with open('auth.log', 'r', encoding='utf-8') as infile, \
+     open('failed.txt', 'w', encoding='utf-8') as outfile:
+    for line in infile:
+        parts = line.strip().split()
+        if len(parts) == 2:
+            user, status = parts
+            if status.lower() != 'success':
+                outfile.write(line)
+
+'''
+#7
+'''
+with open('traffic.txt', 'r', encoding='utf-8') as infile, \
+     open('alert.txt', 'w', encoding='utf-8') as outfile:
+    for line in infile:
+        line = line.strip()
+        if line:
+            try:
+                value = float(line)
+                if value > 1000:
+                    outfile.write(line + '\n')
+            except ValueError:
+                pass
+'''
+#8
+'''
+with open('commands.txt', 'r', encoding='utf-8') as infile, \
+     open('safe.txt', 'w', encoding='utf-8') as outfile:
+    for line in infile:
+        if 'rm' not in line:
+            outfile.write(line)
+
+'''
+#9
+'''
+with open('users.txt', 'r', encoding='utf-8') as infile:
+    total_users = sum(1 for line in infile if line.strip())
+
+with open('report.txt', 'w', encoding='utf-8') as outfile:
+    outfile.write(f"Всего пользователей: {total_users}\n")
+
+'''
+#10
+'''
+with open('full_log.txt', 'w', encoding='utf-8') as outfile:
+    for filename in ['log1.txt', 'log2.txt']:
+        with open(filename, 'r', encoding='utf-8') as infile:
+            for line in infile:
+                outfile.write(line)
+
+'''
